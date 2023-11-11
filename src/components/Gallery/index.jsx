@@ -23,7 +23,7 @@ const ImageList = styled.div`
   box-sizing: border-box;
 `;
 
-const Gallery = ({ photos = [] }) => {
+const Gallery = ({ photos = [], onPhotoSelected }) => {
   return (
     <>
       <Tags />
@@ -33,10 +33,9 @@ const Gallery = ({ photos = [] }) => {
           <ImageList>
             {photos.map((photo) => (
               <Image
+                onZoom={onPhotoSelected}
                 key={photo.id}
-                path={photo.path}
-                font={photo.fonte}
-                title={photo.titulo}
+                photo={photo}
               />
             ))}
           </ImageList>

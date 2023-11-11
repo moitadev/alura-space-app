@@ -52,6 +52,11 @@ const LikeButton = styled.button`
   background-image: url('/public/icones/favorito.png');
   background-repeat: no-repeat;
   cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.3);
+    transition: all 0.3s ease;
+  }
 `;
 
 const ExpandButton = styled.button`
@@ -62,19 +67,24 @@ const ExpandButton = styled.button`
   background-image: url('/public/icones/expandir.png');
   background-repeat: no-repeat;
   cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.3);
+    transition: all 0.3s ease;
+  }
 `;
 
-const Image = ({ path, title, font }) => {
+const Image = ({ photo, expanded = false, onZoom }) => {
   return (
-    <StyledCard>
-      <StyledImage src={path} alt={title} />
+    <StyledCard id={photo.id}>
+      <StyledImage src={photo.path} alt={photo.titulo} />
       <StyledCaption>
-        <h3>{title}</h3>
+        <h3>{photo.titulo}</h3>
         <StyledFooter>
-          <p>{font}</p>
+          <p>{photo.fonte}</p>
           <ButtonsWrapper>
             <LikeButton value="like" />
-            <ExpandButton value="expand" />
+            <ExpandButton onClick={() => onZoom(photo)} value="expand" />
           </ButtonsWrapper>
         </StyledFooter>
       </StyledCaption>
