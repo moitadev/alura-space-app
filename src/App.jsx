@@ -5,6 +5,8 @@ import Aside from './components/Aside';
 import Hero from './components/Hero';
 import backgroundImage from './assets/banner.png';
 import Gallery from './components/Gallery';
+import photos from './fotos.json'
+import { useState } from 'react';
 
 const GradientBackground = styled.div`
   background: linear-gradient(
@@ -34,7 +36,8 @@ const GalleryContent = styled.section`
   flex-grow: 1;
 `;
 
-function App() {
+const App = () => {
+  const [galleryPhotos, setGalleryPhotos] = useState(photos)
   return (
     <GradientBackground>
       <GlobalStyle />
@@ -47,7 +50,7 @@ function App() {
               text="A galeria mais completa de fotos do espaço!"
               backgroundImage={backgroundImage}
             />
-            <Gallery />
+            <Gallery photos={galleryPhotos} />
           </GalleryContent>
         </MainContainer>
       </AppContainer>
