@@ -6,6 +6,9 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img{
+    max-width: 212px;
+  }
 `;
 
 const Header = () => {

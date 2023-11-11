@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import GlobalStyle from './components/GlobalStyle';
 import Header from './components/Header';
+import Aside from './components/Aside';
+import Hero from './components/Hero';
+import backgroundImage from './assets/banner.png';
+import Gallery from './components/Gallery';
 
 const GradientBackground = styled.div`
   background: linear-gradient(
@@ -11,16 +15,42 @@ const GradientBackground = styled.div`
   );
   width: 100%;
   min-height: 100vh;
-  img{
-    max-width: 212px;
-  }
+`;
+
+const AppContainer = styled.div`
+  width: 1440px;
+  max-width: 100%;
+  margin: 0 auto;
+`;
+
+const MainContainer = styled.main`
+  display: flex;
+  gap: 24px;
+`;
+
+const GalleryContent = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `;
 
 function App() {
   return (
     <GradientBackground>
       <GlobalStyle />
-      <Header />
+      <AppContainer>
+        <Header />
+        <MainContainer>
+          <Aside />
+          <GalleryContent>
+            <Hero
+              text="A galeria mais completa de fotos do espaço!"
+              backgroundImage={backgroundImage}
+            />
+            <Gallery />
+          </GalleryContent>
+        </MainContainer>
+      </AppContainer>
     </GradientBackground>
   );
 }
