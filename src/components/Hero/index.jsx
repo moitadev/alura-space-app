@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 const StyledHero = styled.div`
-  max-width: 1156px;
   width: 100%;
-  flex-shrink: 1;
   border-radius: 20px;
   background-image: ${(props) => 'url(' + props.$backgroundImage + ')'};
   background-position: center;
