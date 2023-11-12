@@ -49,8 +49,6 @@ const LikeButton = styled.button`
   height: 24px;
   border: 0;
   background-color: transparent;
-  background-image: url('/public/icones/favorito.png');
-  background-repeat: no-repeat;
   cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
@@ -60,31 +58,32 @@ const LikeButton = styled.button`
 `;
 
 const ExpandButton = styled.button`
-  width: 24px;
-  height: 24px;
   border: 0;
-  background-color: transparent;
-  background-image: url('/public/icones/expandir.png');
-  background-repeat: no-repeat;
+  padding: 0;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: transparent;
   &:hover {
     transform: scale(1.3);
     transition: all 0.3s ease;
   }
 `;
 
-const Image = ({ photo, expanded = false, onZoom }) => {
+const Image = ({ photo, expanded = false, onZoom, onFavoriteToggle }) => {
   return (
-    <StyledCard id={photo.id}>
+    <StyledCard $expanded={expanded} id={`foto-${photo.id}`}>
       <StyledImage src={photo.path} alt={photo.titulo} />
       <StyledCaption>
         <h3>{photo.titulo}</h3>
         <StyledFooter>
           <p>{photo.fonte}</p>
           <ButtonsWrapper>
-            <LikeButton value="like" />
-            <ExpandButton onClick={() => onZoom(photo)} value="expand" />
+            <LikeButton onClick={() => onFavoriteToggle(photo)}>
+              <img src="/public/icones/favorito.png" alt="Ícone de favorito" />
+            </LikeButton>
+            {!expanded && <ExpandButton onClick={() => onZoom(photo)} aria-hidden={expanded}>
+              <img src="/public/icones/expandir.png" alt="Ícone de expandir" />
+            </ExpandButton>}
           </ButtonsWrapper>
         </StyledFooter>
       </StyledCaption>

@@ -23,7 +23,7 @@ const ImageList = styled.div`
   box-sizing: border-box;
 `;
 
-const Gallery = ({ photos = [], onPhotoSelected }) => {
+const Gallery = ({ photos = [], onPhotoSelected, onFavoriteToggle }) => {
   return (
     <>
       <Tags />
@@ -34,6 +34,7 @@ const Gallery = ({ photos = [], onPhotoSelected }) => {
             {photos.map((photo) => (
               <Image
                 onZoom={onPhotoSelected}
+                onFavoriteToggle={onFavoriteToggle}
                 key={photo.id}
                 photo={photo}
               />

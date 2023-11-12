@@ -40,6 +40,10 @@ const GalleryContent = styled.section`
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  const onFavoriteToggle = (photo) => {
+    console.log(photo)
+  }
   return (
     <GradientBackground>
       <GlobalStyle />
@@ -55,11 +59,12 @@ const App = () => {
             <Gallery
               photos={galleryPhotos}
               onPhotoSelected={photo => setSelectedPhoto(photo)}
+              onFavoriteToggle={onFavoriteToggle}
             />
           </GalleryContent>
         </MainContainer>
       </AppContainer>
-      <ZoomModal photo={selectedPhoto} />
+      <ZoomModal photo={selectedPhoto} onClosed={() => setSelectedPhoto(null)} />
     </GradientBackground>
   );
 };

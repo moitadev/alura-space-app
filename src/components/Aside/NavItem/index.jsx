@@ -9,6 +9,9 @@ const StyledItem = styled.li`
     display: flex;
     align-items: center;
     gap: 22px;
+    &:hover{
+        
+    }
 `
 
 const NavItem = ({ children, activeIcon, disabledIcon, active = false }) => {
