@@ -42,7 +42,19 @@ const App = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const onFavoriteToggle = (photo) => {
-    console.log(photo)
+    if(photo.id === selectedPhoto?.id){
+      setSelectedPhoto({
+        ...selectedPhoto,
+        favorite: !selectedPhoto.favorite
+      })
+    }
+
+    setGalleryPhotos(galleryPhotos.map(galleryPhoto => {
+      return{
+        ...galleryPhoto,
+        favorite: galleryPhoto.id === photo.id ? !photo.favorite : galleryPhoto.favorite
+      }
+    }))
   }
   return (
     <GradientBackground>
@@ -64,7 +76,7 @@ const App = () => {
           </GalleryContent>
         </MainContainer>
       </AppContainer>
-      <ZoomModal photo={selectedPhoto} onClosed={() => setSelectedPhoto(null)} />
+      <ZoomModal photo={selectedPhoto} onClosed={() => setSelectedPhoto(null)} onFavoriteToggle={onFavoriteToggle}/>
     </GradientBackground>
   );
 };

@@ -70,6 +70,10 @@ const ExpandButton = styled.button`
 `;
 
 const Image = ({ photo, expanded = false, onZoom, onFavoriteToggle }) => {
+
+  const favoriteIcon = photo.favorite ? '/public/icones/favorito-ativo.png' : '/public/icones/favorito.png';
+
+
   return (
     <StyledCard $expanded={expanded} id={`foto-${photo.id}`}>
       <StyledImage src={photo.path} alt={photo.titulo} />
@@ -79,7 +83,7 @@ const Image = ({ photo, expanded = false, onZoom, onFavoriteToggle }) => {
           <p>{photo.fonte}</p>
           <ButtonsWrapper>
             <LikeButton onClick={() => onFavoriteToggle(photo)}>
-              <img src="/public/icones/favorito.png" alt="Ícone de favorito" />
+              <img src={favoriteIcon} alt="Ícone de favorito" />
             </LikeButton>
             {!expanded && <ExpandButton onClick={() => onZoom(photo)} aria-hidden={expanded}>
               <img src="/public/icones/expandir.png" alt="Ícone de expandir" />
