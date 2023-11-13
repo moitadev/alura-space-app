@@ -6,7 +6,7 @@ import Hero from './components/Hero';
 import backgroundImage from './assets/banner.png';
 import Gallery from './components/Gallery';
 import photos from './fotos.json';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ZoomModal from './components/ZoomModal';
 
 const GradientBackground = styled.div`
@@ -40,27 +40,45 @@ const GalleryContent = styled.section`
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [tag, setTag] = useState(0);
+
+  useEffect(() => {
+    const filteredPhotos = photos.filter((photo) => {
+      const filterByTag = !tag || photo.tagId === tag;
+      const filterByTitle = !filter || photo.titulo.toLowerCase().includes(filter.toLowerCase());
+      return filterByTag && filterByTitle;
+    });
+    setGalleryPhotos(filteredPhotos);
+  }, [filter, tag]);
 
   const onFavoriteToggle = (photo) => {
-    if(photo.id === selectedPhoto?.id){
+    if (photo.id === selectedPhoto?.id) {
       setSelectedPhoto({
         ...selectedPhoto,
-        favorite: !selectedPhoto.favorite
-      })
+        favorite: !selectedPhoto.favorite,
+      });
     }
 
-    setGalleryPhotos(galleryPhotos.map(galleryPhoto => {
-      return{
-        ...galleryPhoto,
-        favorite: galleryPhoto.id === photo.id ? !photo.favorite : galleryPhoto.favorite
-      }
-    }))
-  }
+    setGalleryPhotos(
+      galleryPhotos.map((galleryPhoto) => {
+        return {
+          ...galleryPhoto,
+          favorite:
+            galleryPhoto.id === photo.id
+              ? !photo.favorite
+              : galleryPhoto.favorite,
+        };
+      })
+    );
+  };
+
+
   return (
     <GradientBackground>
       <GlobalStyle />
       <AppContainer>
-        <Header />
+        <Header filter={filter} setFilter={setFilter} />
         <MainContainer>
           <Aside />
           <GalleryContent>
@@ -70,13 +88,18 @@ const App = () => {
             />
             <Gallery
               photos={galleryPhotos}
-              onPhotoSelected={photo => setSelectedPhoto(photo)}
+              onPhotoSelected={(photo) => setSelectedPhoto(photo)}
               onFavoriteToggle={onFavoriteToggle}
+              setTag={setTag}
             />
           </GalleryContent>
         </MainContainer>
       </AppContainer>
-      <ZoomModal photo={selectedPhoto} onClosed={() => setSelectedPhoto(null)} onFavoriteToggle={onFavoriteToggle}/>
+      <ZoomModal
+        photo={selectedPhoto}
+        onClosed={() => setSelectedPhoto(null)}
+        onFavoriteToggle={onFavoriteToggle}
+      />
     </GradientBackground>
   );
 };

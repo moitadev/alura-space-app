@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import TextField from '../SearchField';
+import SearchField from '../SearchField';
 
 const StyledHeader = styled.header`
   padding: 60px 0;
@@ -11,11 +11,11 @@ const StyledHeader = styled.header`
   }
 `;
 
-const Header = () => {
+const Header = ({ filter, setFilter }) => {
   return (
     <StyledHeader>
       <img src="/imagens/logo.png" alt="Space App" />
-      <TextField />
+      <SearchField filter={filter} setFilter={setFilter}  />
     </StyledHeader>
   );
 };

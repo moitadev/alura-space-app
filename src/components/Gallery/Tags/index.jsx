@@ -33,13 +33,13 @@ const StyledButton = styled.button`
   }
 `;
 
-const Tags = () => {
+const Tags = ({ setTag }) => {
   return (
     <>
       <TagsWrapper>
         <h3>Busque por tags:</h3>
         {tags.map((tag) => (
-          <StyledButton key={tag.id}>{tag.titulo}</StyledButton>
+          <StyledButton key={tag.id} onClick={() => setTag(tag.tag)}>{tag.titulo}</StyledButton>
         ))}
       </TagsWrapper>
     </>

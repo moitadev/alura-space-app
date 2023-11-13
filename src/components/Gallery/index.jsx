@@ -23,10 +23,10 @@ const ImageList = styled.div`
   box-sizing: border-box;
 `;
 
-const Gallery = ({ photos = [], onPhotoSelected, onFavoriteToggle }) => {
+const Gallery = ({ photos = [], onPhotoSelected, onFavoriteToggle, setTag }) => {
   return (
     <>
-      <Tags />
+      <Tags setTag={setTag} />
       <ContainerGallery>
         <FluidSection>
           <Title>Navegue pela galeria</Title>

@@ -25,10 +25,10 @@ const StyledInput = styled.input`
   }
 `;
 
-const SearchField = () => {
+const SearchField = ({setFilter}) => {
   return (
   <StyledInputWrapper>
-    <StyledInput type="text" placeholder="O que você procura?" />
+    <StyledInput onChange={(e) => { setFilter(e.target.value) }} type="text" placeholder="O que você procura?" />
     <MagnifyingGlass />
   </StyledInputWrapper>
   );
